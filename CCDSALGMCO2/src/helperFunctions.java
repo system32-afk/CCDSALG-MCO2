@@ -7,10 +7,11 @@ import java.sql.SQLOutput;
 
 public class helperFunctions {
     private Graph graph=null;
+
+
     public Graph loadFile(String filename) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
-
             String line;
             int left, right, numOfAccounts, numOfConnections; //left and right values
             String[] parts;
@@ -18,11 +19,13 @@ public class helperFunctions {
             int index = 0;
             int leftIndex;
 
-
+            //this reads the number of accounts and number of connections
             line = reader.readLine();
             parts = line.split("\\s+");
             numOfAccounts = Integer.parseInt(parts[0]);
             numOfConnections = Integer.parseInt(parts[1]);
+
+            //OPTIONAL: idk the purpose of these yet
             System.out.println("numOfAccounts: " + numOfAccounts + "\n" + "numOfConnections: " + numOfConnections);
 
             while ((line = reader.readLine()) != null) {
@@ -39,7 +42,7 @@ public class helperFunctions {
                     leftIndex = graph.getNodes().size() - 1; //the index of the new node is at the end of the list - 1
                 }
 
-                //if node already exist, just add connection
+                //add the left number as their friend
                 graph.getNodes().get(leftIndex).addConnection(right);
                 index++;
             }
